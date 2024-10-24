@@ -6,6 +6,11 @@ from app.commands import CommandHandler
 from app.commands import Command
 class App:
     def __init__(self): # Constructor
+        os.makedirs('logs', exits_ok=True)
+        self.configure_logging()
+        load_dotenv() # Loads the .env file contents
+        self.settings = self.load_environment_variables()
+        self.settings.setdefualt('ENVIRONMENT', 'PRODUCTION')
         self.command_handler = CommandHandler()
 
     def configure_logging(self):
@@ -20,6 +25,7 @@ class App:
         settings = {key: value for key, value in os.environ.items()}
         # print(settings)
         logging.info("Environment variables loaded.")
+        logging.critical("Oh no I'm broken")
         return settings
 
     def get_environment_variable(self, env_var: str = 'ENVIRONMENT'):
