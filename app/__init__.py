@@ -9,11 +9,11 @@ import logging.config
 
 class App:
     def __init__(self): # Constructor
-        os.makedirs('logs', exits_ok=True)
+        os.makedirs('logs', exist_ok=True)
         self.configure_logging()
         load_dotenv() # Loads the .env file contents
         self.settings = self.load_environment_variables()
-        self.settings.setdefualt('ENVIRONMENT', 'PRODUCTION')
+        self.settings.setdefault('ENVIRONMENT', 'PRODUCTION')
         self.command_handler = CommandHandler()
 
     def configure_logging(self):
@@ -50,6 +50,10 @@ class App:
     def start(self):
         # Register commands here
         self.load_plugins()
+        logging.info("Application started.")
         print("Type 'exit' to exit.")
-        while True:  #REPL Read, Evaluate, Print, Loop
-            self.command_handler.execute_command(input(">>> ").strip())
+        while True:
+            command_input = input(">>> ").strip()
+            if command_input.lower() == 'exit':
+                break
+            self.command_handler.execute_command(command_input)
