@@ -55,5 +55,5 @@ class App:
         while True:
             command_input = input(">>> ").strip()
             if command_input.lower() == 'exit':
-                break
+                sys.exit("Exiting...")
             self.command_handler.execute_command(command_input)

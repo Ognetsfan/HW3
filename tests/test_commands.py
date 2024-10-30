@@ -10,7 +10,7 @@ def test_greet_command(capfd):
     assert out == "Hello, World!\n", "The GreetCommand should print 'Hello, World!'"
 
 def test_goodbye_command(capfd):
-    command = GopodbyeCommand()
+    command = GoodbyeCommand()
     command.execute()
     out, err = capfd.readouterr()
     assert out == "Goodbye\n", "The GreetCommand should print 'Hello, World!'"
@@ -37,4 +37,4 @@ def test_app_menu_command(capfd, monkeypatch):
     with pytest.raises(SystemExit) as e:
         app.start() # Assuming App.start() is now a static method based on previous discussions
 
-    assert str(e.value) == "Exiting..", "The app did not exit as expected"
+    assert str(e.value) == "Exiting...", "The app did not exit as expected"
